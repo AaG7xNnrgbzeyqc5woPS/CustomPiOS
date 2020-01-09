@@ -6,13 +6,16 @@ function die () {
 }
 
 function fixLd(){
-  sed -i 's@/usr/lib/arm-linux-gnueabihf/libcofi_rpi.so@\#/usr/lib/arm-linux-gnueabihf/libcofi_rpi.so@' etc/ld.so.preload
-  sed -i 's@/usr/lib/arm-linux-gnueabihf/libarmmem.so@\#/usr/lib/arm-linux-gnueabihf/libarmmem.so@' etc/ld.so.preload
+  sed -i 's@/usr/lib/arm-linux-gnueabihf/libcofi_rpi.so@\#/usr/lib/arm-linux-gnueabihf/libcofi_rpi.so@' etc/ld.so.prelod
+  # sed -i 's@/usr/lib/arm-linux-gnueabihf/libarmmem.so@\#/usr/lib/arm-linux-gnueabihf/libarmmem.so@' etc/ld.so.preloadad
+  sed -i 's@/usr/lib/arm-linux-gnueabihf/libarmmem-${PLATFORM}.so@\#/usr/lib/arm-linux-gnueabihf/libarmmem-aarch64.so@' etc/ld.so.preload 
 }
 
 function restoreLd(){
   sed -i 's@\#/usr/lib/arm-linux-gnueabihf/libcofi_rpi.so@/usr/lib/arm-linux-gnueabihf/libcofi_rpi.so@' etc/ld.so.preload
-  sed -i 's@\#/usr/lib/arm-linux-gnueabihf/libarmmem.so@/usr/lib/arm-linux-gnueabihf/libarmmem.so@' etc/ld.so.preload
+  #sed -i 's@\#/usr/lib/arm-linux-gnueabihf/libarmmem.so@/usr/lib/arm-linux-gnueabihf/libarmmem.so@' etc/ld.so.preload
+  sed -i 's@\#/usr/lib/arm-linux-gnueabihf/libarmmem-aarch64.so@/usr/lib/arm-linux-gnueabihf/libarmmem-${PLATFORM}.so@' etc/ld.so.preload #by john
+  #sed -i 's@\#/usr/lib/arm-linux-gnueabihf/libarmmem-aarch64.so@/usr/lib/arm-linux-gnueabihf/libarmmem-aarch64.so@' etc/ld.so.preload  #by peter
 }
 
 function pause() {
